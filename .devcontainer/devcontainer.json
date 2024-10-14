@@ -1,38 +1,33 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
-// README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
+// README at: https://github.com/devcontainers/templates/tree/main/src/java
 {
-  "name": "Fei-Dev",
+  "name": "Android",
   // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-  "dockerComposeFile": "../docker-dev-build/docker-compose.yml",
-  "service": "devcontainer",
-  "workspaceFolder": "/workspace",
+  "image": "mcr.microsoft.com/devcontainers/java:1-21-bullseye",
+
   "features": {
-    "ghcr.io/devcontainers/features/java:1": {},
-    "ghcr.io/nordcominc/devcontainer-features/android-sdk:1": {}
-  },
-  "customizations": {
-    "vscode": {
-      "extensions": [
-        "DavidAnson.vscode-markdownlint",
-        "isudox.vscode-jetbrains-keybindings",
-        "vscjava.vscode-gradle",
-        "totalcross.android-xml-editor",
-        "ms-azuretools.vscode-docker",
-        "adelphes.android-dev-ext",
-        "fwcd.kotlin"
-      ]
+    "ghcr.io/devcontainers/features/java:1": {
+      "version": "none",
+      "installMaven": "false",
+      "installGradle": "false"
     }
   },
-  "shutdownAction": "stopCompose",
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
-  // "forwardPorts": [],
+  "forwardPorts": [8080],
+
   // Use 'postCreateCommand' to run commands after the container is created.
-  "postCreateCommand": "adb start-server && sh gradlew build",
-  // "postAttachCommand": "adb connect emulator:5555"
+  // "postCreateCommand": "java -version",
+
   // Configure tool-specific properties.
-  // "customizations": {},
+  "customizations" : {
+    "jetbrains" : {
+      "backend" : "IntelliJ"
+    }
+  },
+
+  "remoteEnv": { "JAVA_HOME": "/usr/lib/jvm/msopenjdk-current" },
+  "runArgs": ["-p", "8080:8080"]
   // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-  //fixme 尝试使用vscode 用户可以访问volume
-  "remoteUser": "root"
+  // "remoteUser": "root"
 }
