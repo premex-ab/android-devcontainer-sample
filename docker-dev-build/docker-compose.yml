@@ -9,15 +9,15 @@ services:
       - gradle-cache:/root/.gradle
       - top-cache:/root/.cache
 
-  emulator:
-    image: budtmo/docker-android:emulator_11.0
-    ports:
-      - "6080"
-    environment:
-      - EMULATOR_DEVICE=Samsung Galaxy S10
-      - WEB_VNC=true
-    devices:
-      - /dev/kvm
+#  emulator:
+#    image: budtmo/docker-android:emulator_11.0
+#    ports:
+#      - "6080"
+#    environment:
+#      - EMULATOR_DEVICE=Samsung Galaxy S10
+#      - WEB_VNC=true
+#    devices:
+#      - /dev/kvm
 
 volumes:
   gradle-cache:
